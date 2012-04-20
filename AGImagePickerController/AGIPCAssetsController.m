@@ -205,6 +205,14 @@
     [AGIPCGridItem performSelector:@selector(resetNumberOfSelections)];
     
     [super viewWillAppear:animated];
+
+  NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:([self.tableView numberOfRowsInSection:0] - 1) inSection:0];
+  [[self tableView] scrollToRowAtIndexPath:scrollIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+  if (self.tableView.contentSize.height > self.tableView.frame.size.height) 
+  {
+    CGPoint offset = CGPointMake(0, self.tableView.contentSize.height -     self.tableView.frame.size.height);
+    [self.tableView setContentOffset:offset animated:YES];
+  }
 }
 
 - (void)viewDidLoad
